@@ -119,7 +119,7 @@ void editarCurso() {
 
       print('\nDigite o número do campo para editar:');
       var campo = stdin.readLineSync(encoding: utf8)!;
-      int campoIdx = int.parse(campo);
+      // int campoIdx = int.parse(campo);
 
       if (campo == '1') {
         print('\nDigite o novo valor para o campo Curso:');
