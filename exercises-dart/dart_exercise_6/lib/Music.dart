@@ -11,7 +11,7 @@ class Music extends Album {
     this._composer, {
     required super.artist,
     required this.albumName,
-    required super.realeseDate,
+    required super.relaeseDate,
     required this.musicName,
   }) : super(name: albumName);
 

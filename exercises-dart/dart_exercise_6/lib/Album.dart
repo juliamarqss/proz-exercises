@@ -1,11 +1,11 @@
 abstract class Album {
   String name;
-  String realeseDate;
+  String relaeseDate;
   String artist;
 
   Album({
     required this.name,
-    required this.realeseDate,
+    required this.relaeseDate,
     required this.artist,
   });
 }

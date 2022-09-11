@@ -9,17 +9,15 @@ void main() {
 
   Music title1 = Music(
     145,
-    'Eu',
+    'Frida',
     artist: 'Mike M.',
     albumName: 'Shadow',
-    realeseDate: '22/02/22',
+    relaeseDate: '22/02/22',
     musicName: 'Oh My',
   );
 
   title1.newTime = 160;
-  title1.newComposer = 'Fulana';
+  title1.newComposer = 'Alanis';
 
-
-  print(title1.timeOfMusic);
-  print(title1.composer);
+  print('\nArtist: ${title1.artist}\nAlbum: ${title1.albumName}\nDate Release: ${title1.relaeseDate}\nMusic: ${title1.musicName}\nSeconds: ${title1.timeOfMusic} sec\nComposer: ${title1.composer}');
 }
