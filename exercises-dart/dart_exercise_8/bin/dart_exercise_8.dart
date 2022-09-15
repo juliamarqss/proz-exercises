@@ -1,5 +1,14 @@
-import 'package:dart_exercise_8/dart_exercise_8.dart' as dart_exercise_8;
+import 'package:dart_exercise_8/PessoaFisica.dart';
 
-void main(List<String> arguments) {
-  print('Hello world: ${dart_exercise_8.calculate()}!');
+void main() {
+  PessoaFisica pf1 = PessoaFisica(
+    id: '',
+    telefone: '',
+    socio: '',
+    endereco: '',
+    horarioDoCadastro: ,
+  );
+  // pf1.geradorId();
+  // pf1.formatoCpf();
+
 }
