@@ -5,6 +5,7 @@ class Endereco {
   String bairro;
   String estado;
   String cep;
+  String cidade;
 
   Endereco({
     required this.logradouro,
@@ -13,6 +14,7 @@ class Endereco {
     required this.bairro,
     required this.estado,
     required this.cep,
+    required this.cidade
   });
 
 }

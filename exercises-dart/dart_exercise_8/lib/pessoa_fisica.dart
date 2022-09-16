@@ -1,4 +1,4 @@
-import 'package:dart_exercise_8/Socio.dart';
+import 'package:dart_exercise_8/socio.dart';
 
 class PessoaFisica extends Socio {
   String cpf;

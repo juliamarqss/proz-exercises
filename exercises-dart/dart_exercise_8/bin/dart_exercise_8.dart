@@ -1,12 +1,11 @@
 import 'dart:io';
 import 'package:cpf_cnpj_validator/cnpj_validator.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
-import 'package:dart_exercise_8/Socio.dart';
 import 'package:uuid/uuid.dart';
-import 'package:dart_exercise_8/Empresa.dart';
-import 'package:dart_exercise_8/Endereco.dart';
-import 'package:dart_exercise_8/PessoaFisica.dart';
-import 'package:dart_exercise_8/PessoaJuridica.dart';
+import 'package:dart_exercise_8/empresa.dart';
+import 'package:dart_exercise_8/endereco.dart';
+import 'package:dart_exercise_8/pessoa_fisica.dart';
+import 'package:dart_exercise_8/pessoa_juridica.dart';
 
 var lista = [];
 
@@ -15,65 +14,10 @@ final geradorID = uuid.v1();
 final hora = DateTime.now();
 
 void main() {
-  PessoaFisica socio1 = PessoaFisica(
-    cpf: '76367980008', // fazer função da formatação
-    nome: 'Mirella Kamilly Letícia Barbosa',
-    endereco: Endereco(
-      logradouro: 'Rua Dom Moura',
-      numero: '39',
-      bairro: 'Upatininga',
-      estado: 'PE',
-      cep: '55896970', // fazer função da formatação
-    ),
-  ); 
 
-  PessoaJuridica socio2 = PessoaJuridica(
-    cnpj: '87009263000140', // fazer função da formatação
-    razaoSocial: 'Lavínia e Tereza Locações de Automóveis Ltda',
-    nomeFantasia: 'Loc. Auto',
-    endereco: Endereco(
-      logradouro: 'Praça Valdomiro Tino de Medeiros',
-      numero: '165',
-      bairro: 'Centro',
-      estado: 'PE',
-      cep: '55375970', // fazer função da formatação
-    ),
-  );
-
-  Empresa empresa1 = Empresa(
-    id: geradorID,
-    cnpj: '18862697000175', // fazer função da formatação
-    razaoSocial: 'Ruan e Sophia Esportes ME',
-    telefone: '1135134023', // fazer função da formatação
-    endereco: Endereco(
-      logradouro: 'Sete de Setembro',
-      numero: '322',
-      bairro: 'Bela Vista',
-      estado: 'Estado',
-      cep: '17037850', // fazer função da formatação
-    ),
-    horarioDoCadastro: '$hora',
-  );
-
-  Empresa empresa2 = Empresa(
-    id: geradorID,
-    cnpj: '654646465',
-    razaoSocial: '',
-    nomeFantasia: '',
-    telefone: '',
-    endereco: Endereco(
-      logradouro: 'Avenida Manoel Borba',
-      numero: '29',
-      bairro: 'Centro',
-      estado: 'PE',
-      cep: '55470970', // fazer função da formatação
-    ),
-    horarioDoCadastro: '$hora',
-  );
-  
-  print(empresa2.endereco.bairro);
-  lista.add(empresa2);
-  print(lista[0].endereco.numero);
+  // print(empresa2.endereco.bairro);
+  // lista.add(empresa2);
+  // print(lista[0].endereco.numero);
 
   var screen = '';
   do {
@@ -109,10 +53,11 @@ void main() {
 
 void cadastrarEmpresa() {
   registrarEmpresa();
-  print(lista);
+  print('\n${lista[0].endereco}.');
 }
 
 void registrarEmpresa() {
+
   print('\nEscreva a Razão Social:');
   final rS = stdin.readLineSync()!;
 
@@ -124,6 +69,8 @@ void registrarEmpresa() {
   if (!CNPJValidator.isValid(cnpj)){
     print('Digite novamente!');
   } else {
+    final cnpjFormat = '${cnpj.substring(0,2)}.${cnpj.substring(2,5)}.${cnpj.substring(5,8)}/${cnpj.substring(8,12)}-${cnpj.substring(12,14)}';
+
     final enderecoEmp = endereco();
     
     final foneEmp = telefone();
@@ -132,63 +79,37 @@ void registrarEmpresa() {
     final screen = stdin.readLineSync()!;
 
     if (screen == '1') {
-      var objEmpresa1 = [{
-      'ID': geradorID,
-      'CNPJ': cnpj,
-      'Data de Cadastro': '$hora',
-      'Razão Social': rS,
-      'Nome Fantasia': nF,
-      'Telefone': foneEmp,
-      'Endereço': enderecoEmp,
-      'Socio': registrarPJ(),
-      }];
       Empresa emp1 = Empresa(
-        cnpj: cnpj,
+        cnpj: cnpjFormat,
         horarioDoCadastro: '$hora',  
-        endereco: Endereco(
-          bairro: '',
-          cep: '',
-          estado: '',
-          logradouro: '',
-          numero: '',
-          complemento: ''
-        ),
+        endereco: enderecoEmp,
         id: geradorID,
         razaoSocial: rS,
         nomeFantasia: nF,
-        pj: PessoaJuridica(
-          cnpj: enderecoEmp,
-          endereco: Endereco(
-            bairro: '',
-            cep: '',
-            estado: '',
-            logradouro: '',
-            numero: ''
-          ),
-          razaoSocial: ''
-        ),
+        pj: registrarPJ(),
         telefone: foneEmp,
       );
-      lista.addAll(objEmpresa1);
+      lista.add(emp1);
     }
 
     if (screen == '2'){
-      var objEmpresa2 = [{
-      'ID': geradorID,
-      'CNPJ': cnpj,
-      'Data de Cadastro': '$hora',
-      'Razão Social': rS,
-      'Nome Fantasia': nF,
-      'Telefone': foneEmp,
-      'Endereço': enderecoEmp,
-      'Socio': registrarPF(),
-      }];
-      lista.addAll(objEmpresa2);
+      Empresa emp2 = Empresa(
+        cnpj: cnpjFormat,
+        horarioDoCadastro: '$hora',  
+        endereco: enderecoEmp,
+        id: geradorID,
+        razaoSocial: rS,
+        nomeFantasia: nF,
+        pf: registrarPF(),
+        telefone: foneEmp,
+      );
+      lista.add(emp2);
     }
   }
 }
 
-Map registrarPJ() {
+Map? registrarPJ() {
+  print('\nPreencher os dados do Sócio PJ ↓');
   print('\nEscreva a Razão Social:');
   final rS = stdin.readLineSync()!;
 
@@ -198,21 +119,29 @@ Map registrarPJ() {
   print('\nEscreva o CNPJ:');
   final cnpj = stdin.readLineSync()!;
   if (!CNPJValidator.isValid(cnpj)){
-    return {'Erro': 'Digite novamente!'};
+    return {'Erro':'Digite novamente!'};
   } else {
-
-    var objPJ = {
-      'CNPJ': cnpj,
-      'Razão Social': rS,
-      'Nome Fantasia': nF,
-      'Endereço': endereco(),
-    };
-
-    return objPJ;
+    if (nF.isEmpty){
+      PessoaJuridica pj1 = PessoaJuridica(
+        endereco: endereco(),
+        cnpj: cnpj,
+        razaoSocial: rS,
+        nomeFantasia: nF,
+      );
+      pj1;
+    } else {
+      PessoaJuridica pj2 = PessoaJuridica(
+        endereco: endereco(),
+        cnpj: cnpj,
+        razaoSocial: rS,
+      );
+      pj2;
+    }
   }
 }
 
-Map registrarPF() {
+Map? registrarPF() {
+  print('\nPreencher os dados do Sócio PF ↓');
   print('\nEscreva o Nome:');
   final nome = stdin.readLineSync()!;
 
@@ -221,42 +150,53 @@ Map registrarPF() {
   if (!CPFValidator.isValid(cpf)){
     return {'Erro':'Digite novamente!'};
   } else {
-
-    var objPF = {
-      'Nome Completo': nome,
-      'CPF': cpf,
-      'Endereço': endereco(),
-    };
-    return objPF;
+    PessoaFisica pf1 = PessoaFisica(
+      nome: nome,
+      cpf: cpf,
+      endereco: endereco(),
+    );
+    pf1;
   }
 }
 
 String endereco() {
-  print('\nEscreva a Rua:');
+  print('\nPreencher os dados do endereço ↓');
+  print('Logradouro:');
   final rua = stdin.readLineSync()!;
 
-  print('\nEscreva o Número:');
+  print('\nNúmero:');
   final numero = stdin.readLineSync()!;
 
-  print('\nEscreva o Complemento:');
+  print('\nComplemento:');
   final complemento = stdin.readLineSync()!;
 
-  print('\nEscreva o Bairro:');
+  print('\nBairro:');
   final bairro = stdin.readLineSync()!;
 
-  print('\nEscreva o Cidade:');
+  print('\nCidade:');
   final cidade = stdin.readLineSync()!;
   
-  print('\nEscreva o Estado:');
+  print('\nEstado:');
   final estado = stdin.readLineSync()!;
   final estHigh = estado.toUpperCase();
 
-  print('\nEscreva o CEP:');
+  print('\nCEP:');
   final cep = stdin.readLineSync()!;
   final cepFormat = '${cep.substring(0,5)}-${cep.substring(5,8)}';
 
-  var formato = '$rua, $numero, $complemento, $bairro, $cidade/$estHigh, $cepFormat';
-  var formato2 = '$rua, $numero, $bairro, $cidade/$estHigh, $cepFormat';
+  Endereco end1 = Endereco(
+    bairro: bairro,
+    cep: cepFormat,
+    estado: estHigh,
+    logradouro: rua,
+    numero: numero,
+    complemento: complemento,
+    cidade: cidade,
+  );
+
+  var formato = '${end1.logradouro}, ${end1.numero}, ${end1.complemento}, ${end1.bairro}, ${end1.cidade}/${end1.estado}, ${end1.cep}';
+
+  var formato2 = '${end1.logradouro}, ${end1.numero}, ${end1.bairro}, ${end1.cidade}/${end1.estado}, ${end1.cep}';
 
   if (complemento.isEmpty){
     return formato2;
