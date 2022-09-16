@@ -14,4 +14,5 @@ class Endereco {
     required this.estado,
     required this.cep,
   });
+
 }
