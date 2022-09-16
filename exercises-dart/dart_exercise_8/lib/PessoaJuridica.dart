@@ -1,14 +1,15 @@
-import 'package:dart_exercise_8/Empresa.dart';
+import 'package:dart_exercise_8/Socio.dart';
 
-class PessoaJuridica extends Empresa {
+class PessoaJuridica extends Socio{
+  String cnpj;
+  String razaoSocial;
+  String? nomeFantasia;
+
   PessoaJuridica({
-    required super.id,
-    required super.razaoSocial,
-    required super.nomeFantasia,
-    required super.cnpj,
-    required super.telefone,
-    required super.socio,
     required super.endereco,
-    required super.horarioDoCadastro,
-  });
+    required this.cnpj,
+    required this.razaoSocial,
+    this.nomeFantasia,
+  }) : super(nome: razaoSocial);
+
 }

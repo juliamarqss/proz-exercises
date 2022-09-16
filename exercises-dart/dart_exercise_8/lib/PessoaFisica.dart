@@ -1,11 +1,11 @@
-import 'package:dart_exercise_8/Empresa.dart';
+import 'package:dart_exercise_8/Socio.dart';
 
-class PessoaFisica extends Empresa {
+class PessoaFisica extends Socio {
+  String cpf;
+
   PessoaFisica({
-    required super.id,
-    required super.telefone,
-    required super.socio,
+    required super.nome,
+    required this.cpf,
     required super.endereco,
-    required super.horarioDoCadastro,
   });
 }

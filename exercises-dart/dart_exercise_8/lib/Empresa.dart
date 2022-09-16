@@ -1,29 +1,15 @@
-abstract class Empresa {
-  String id;
-  String? razaoSocial;
-  String? nomeFantasia;
-  String? cnpj;
-  String telefone;
-  String socio;
-  String endereco; // como colocar as outras keys
-  DateTime horarioDoCadastro;
+import 'package:dart_exercise_8/Socio.dart';
+
+class Empresa {
+  String? id;
+  String? telefone;
+  Socio socio;
+  String? horarioDoCadastro;
 
   Empresa({
-    required this.id,
-    this.razaoSocial,
-    this.nomeFantasia,
-    this.cnpj,
-    required this.telefone,
+    this.id,
+    this.telefone,
     required this.socio,
-    required this.endereco,
-    required this.horarioDoCadastro,
+    this.horarioDoCadastro,
   });
-
-  void geradorId() {
-
-  }
-
-  void formatoCpf() {
-    
-  }
 }
