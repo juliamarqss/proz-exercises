@@ -1,24 +1,33 @@
+import 'package:dart_exercise_8/socio.dart';
+import 'package:dart_exercise_8/endereco.dart';
+
 class Empresa {
   String id;
-  String? cnpj;
-  String razaoSocial;
-  String? nomeFantasia;
+  String cnpjEmp;
+  String razaoSocialEmp;
+  String? nomeFantasiaEmp;
   String? telefone;
-  String endereco;
+  Endereco? enderecoEmp;
   // Endereco endereco;
-  String horarioDoCadastro;
-  Map? pf;
-  Map? pj;
+  String dataCadastro;
+  Socio? socio;
 
   Empresa({
     required this.id,
-    this.cnpj,
-    required this.razaoSocial,
-    this.nomeFantasia,
+    required this.cnpjEmp,
+    required this.razaoSocialEmp,
+    this.nomeFantasiaEmp,
     this.telefone,
-    required this.endereco,
-    this.pf,
-    this.pj,
-    required this.horarioDoCadastro,
+    required this.enderecoEmp,
+    this.socio,
+    required this.dataCadastro,
   });
+
+  String get cnpjFormat {
+    if(cnpjEmp.length == 14) {
+      final format = '${cnpjEmp.substring(0,2)}.${cnpjEmp.substring(2,5)}.${cnpjEmp.substring(5,8)}/${cnpjEmp.substring(8,12)}-${cnpjEmp.substring(12,14)}';
+      return format;
+    }
+    return cnpjEmp;
+  }
 }

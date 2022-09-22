@@ -17,4 +17,8 @@ class Endereco {
     required this.cidade
   });
 
+  String get cepFormat{
+    return '${cep.substring(0,5)}-${cep.substring(5,8)}';
+  } 
+
 }

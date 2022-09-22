@@ -10,6 +10,6 @@ class PessoaJuridica extends Socio{
     required this.cnpj,
     required this.razaoSocial,
     this.nomeFantasia,
-  }) : super(nome: razaoSocial);
+  }) : super(cnpj, nome: razaoSocial);
 
 }

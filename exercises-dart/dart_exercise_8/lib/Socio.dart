@@ -1,9 +1,13 @@
+import 'package:dart_exercise_8/endereco.dart';
+
 abstract class Socio {
   String nome;
-  String endereco;
+  Endereco endereco;
+  String documento;
   
-  Socio({
+  Socio( this.documento, {
     required this.nome,
     required this.endereco,
   });
+  
 }

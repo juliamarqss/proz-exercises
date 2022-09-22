@@ -7,5 +7,5 @@ class PessoaFisica extends Socio {
     required super.nome,
     required this.cpf,
     required super.endereco,
-  });
+  }) : super(cpf);
 }
